@@ -75,3 +75,13 @@ java -version  # 查看当前jdk版本
 tar xfz pycharm-*.tar.gz  # 解压pycharm压缩包
 ./pycharm/bin/pycharm.sh  # 运行pycharm
 ```
+
+## 动态跟踪文件内容的变化
+```sh
+tail -f
+```
+
+## 在命令行中编辑生成文件
+```sh
+cat > hello.py << "EOF"
+```
