@@ -71,3 +71,18 @@ def powersum(power, *args):
 # 由于在args变量前有*前缀，所有多余的函数参数都会作为一个元组存储在args中。
 # 如果使用的是**前缀，多余的参数则会被认为是一个字典的键/值对。
 ```
+
+## 安装Python沙盒环境
+```sh
+sudo apt-get install python-setuptools  # 安装easy-install
+sudo apt-get install python-virtualenv  # 安装virtualenv
+
+mkdir envs
+cd envs
+virtualenv myenv_1  # 建立虚拟环境 myenv_1
+source myenv_1/bin/activate  # 激活虚拟环境
+
+# 以下操作在（myenv_1）中进行了
+pip install django  # 安装django
+pip install pil  # 在virtualenv环境中安装pil需要编译，需先安装build-essential和python-dev
+```
