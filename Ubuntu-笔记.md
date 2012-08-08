@@ -50,3 +50,28 @@ ServerAliveInterval 300  #每过5分钟发一个数据包到服务器表示“�
 
 # 如果你没有root权限，修改或者创建~/.ssh/ssh_config也是可以的
 ```
+
+## 安装 Sun JDK 和 Pycharm
+```sh
+# 从http://java.sun.com中下载jdk：jdk-6u32-linux-i586.bin，存放到/usr/java目录
+
+sudo chmod u+x /usr/java/jdk-6u32-linux-i586.bin  # 给执行权限
+
+sudo /usr/java/jdk-6u23-linux-i586.bin  # 安装JDK
+
+sudo gedit /etc/profile  # 设置环境变量，写入以下设置：
+export JAVA_HOME=/usr/java/jdk1.6.0_32
+export PATH=$JAVA_HOME/bin:$PATH
+
+source /etc/profile  # 使上面设置的环境变量生效
+
+# 通过以下命令设置默认的jdk：
+sudo update-alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_32/bin/java 300
+sudo update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.6.0_32/bin/javac 300
+sudo update-alternatives --config java
+
+java -version  # 查看当前jdk版本
+
+tar xfz pycharm-*.tar.gz  # 解压pycharm压缩包
+./pycharm/bin/pycharm.sh  # 运行pycharm
+```
