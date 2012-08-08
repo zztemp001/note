@@ -1,3 +1,9 @@
+## 利用继承自身来实现递归无线级分类
+```python
+parent=models.ForeignKey('self',null=True,blank=True,related_name="child",verbose_name="父类标识")
+# blank=Trun 是关键，否则第一个数据填不进去
+```
+
 ## 一个Product的model，每个Product有数张相关的图片
 ```python
 class Product(models.Model): 
