@@ -4,6 +4,39 @@
 一旦你完成了这个程序，你就可以说是一个Python程序员了。
 ```
 
+## 使用global声明全局变量
+```python
+global x, y, z
+```
+
+## 理解位操作
+```python
+5 << 3
+11 >>1
+```
+
+## 打印文档字符串
+```python
+print fun.__doc__
+```
+
+## 获取命令行参数
+```python
+import sys
+for i in sys.argv:
+    print i
+```
+
+## 中文编码支持
+```python
+#方法一
+# coding=utf-8
+
+#方法二
+#!/usr/bin/env python  
+# -*- coding: utf-8 -*- 
+```
+
 ## 使用pyqrcodec生成和读取二维码
 ```python
 sudo apt-get install pyqrcodec
