@@ -1,3 +1,123 @@
+## 运行shell脚本
+```sh
+sh filename  # 使用sh命令运行脚本
+
+chmod +x filename
+./filename  # 通过 chmod使文件本身可执行
+
+sh -x filename  # 执行该脚本并显示所有变量的值
+sh -n filename  # 不需要执行脚本只是检查语法
+```
+
+## shell脚本的基本用法
+```sh
+a="hello world"  #对变量赋值
+num=2  #对变量赋值
+echo $a  打印变量的内容
+echo "this is the ${num}nd"  # 打印变量a的内容，可以使用花括号来告诉shell我们要打印的是num变量
+
+# 变量$SHELL包含了登录shell的名称，这里和/bin/bash进行了比较。
+if [ "$SHELL" = "/bin/bash" ]; then
+　echo "your login shell is the bash (bourne again shell)"
+else
+　echo "your login shell is not bash but $SHELL"
+fi
+# 通常用" [ ] "来表示条件测试。注意这里的空格很重要。要确保方括号的空格。
+# [ -f "somefile" ] ：判断是否是一个文件
+# [ -x "/bin/ls" ] ：判断/bin/ls是否存在并有可执行权限
+# [ -n "$var" ] ：判断$var变量是否有值
+# [ "$a" = "$b" ] ：判断$a和$b是否相等
+
+[ -f "/etc/shadow" ] && echo "This passwors"  # &&是快捷操作符，如果左边为真则执行右边的语句
+
+ftype=`file "$1"`  # 特殊变量$1包含了传递给该程序的第一个参数值。
+case "$ftype" in
+"$1: Zip archive"*)
+　　unzip "$1" ;;
+"$1: gzip compressed"*)
+　　gunzip "$1" ;;
+"$1: bzip2 compressed"*)
+　　bunzip2 "$1" ;;
+*) echo "File $1 can not be uncompressed with smartzip";;
+esac
+# 自动解压bzip2, gzip 和zip 类型的压缩文件
+
+echo "What is your favourite OS?"
+select var in "Linux" "Gnu Hurd" "Free BSD" "Other"; do
+　　　　break
+done
+echo "You have selected $var"
+# 下面面是系统显示的结果：
+What is your favourite OS?
+1) Linux
+2) Gnu Hurd
+3) Free BSD
+4) Other
+#? 1
+You have selected Linux
+
+for var in A B C ; do
+　 echo "var is $var"
+done
+```
+
+## 一个经典的脚本示例+注释
+```
+这个脚本的作用就是从一个文件里读取一个需要管理的所有log文件，并且读入一个数组。
+然后判断是否存在，如果不存在则忽略。
+如果存在将判断大小是否超过设定大小，如果超过则备份。
+```
+```sh
+#!/bin/bash   # 开头这里声明了使用bash
+  
+##author:ginge   # 注释以#开头，可以从一行的任意位置开始
+  
+echo "logfiles to manage:"  
+logfiles=${1-./logfiles}   # 如果存在第一个命令参数则使用它对logfiles赋值，如果不存在则赋值为./logfiles
+size=${2-100}   # 变量引用以$符号开始，严格点要使用${variable}形式
+  
+index=0;   
+#read the log file into the array   
+while read logfiles[$index]   
+   do   
+     echo "$index: ${logfiles[${index}]}"  
+     (( index +=1 ))   
+   done < $logfiles   文件读取，使用一个<符就行了
+    
+i=0;   
+while [ $i -lt $index ]   
+   do   
+      logfile=${logfiles[$i]}   
+  
+      (( i += 1 ))   
+  
+      dir=${logfile%/*}   
+      if [ -z $logfile ] || [ ! -f $logfile ];then   
+        echo "$logfile doesn't exist. ignored."  
+        continue;   
+      fi   
+  
+      echo "handling logfile: $logfile"  
+      echo "entering dir:$dir"  
+      cd $dir   
+  
+      result="`find $logfile -size +${size}M`"  
+      if [ ! -z $result ]; then   
+        echo "backup $logfile..."  
+         cp $logfile $logfile".`date '+%G%m%d'`"  
+         : > $logfile   
+      else   
+         echo "it's not bigger than ${size} M"  
+      fi   
+        
+   done   
+
+# 执行命令
+# `` 这个`是跟~同一个键的那个符号，假如这样一个语句
+# Result=`date`
+# 执行后echo $Result将是这样的Tue Jan 6 15:13:41 CST 2009
+```
+
 ## 使用du命令查看文件、目录的大小
 ```sh
 du -sh .
