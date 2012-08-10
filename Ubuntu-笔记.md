@@ -1,3 +1,10 @@
+## 使用du命令查看文件、目录的大小
+```sh
+du -sh .
+du -ch .
+du -sh one.txt two.txt  #可以同时查看多个文件
+```
+
 ## 使用lynx或w3m在命令行上网
 ```
 sudo apt-get install lynx
