@@ -1,3 +1,14 @@
+## 使用 blackbird 跟踪输出信息
+```
+官方网址：www.gscottolson.com/blackbirdjs/
+```
+```html
+<head>  
+    <script type="text/javascript" src="/PATH/TO/blackbird.js"></script>  
+    <link type="text/css" rel="Stylesheet" href="/PATH/TO/blackbird.css" />  
+</head>  
+```
+
 ## 使通过ajax方法或动态添加的内容正常工作
 ```js
 //重要：动态生成，或通过ajax获取的DOM元素将无法正常工作，因为页面元素的事件响应已在生成之前完成
