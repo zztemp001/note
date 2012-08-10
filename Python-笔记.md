@@ -4,6 +4,12 @@
 一旦你完成了这个程序，你就可以说是一个Python程序员了。
 ```
 
+## 安装PIL
+```sh
+sudo apt-get install python-imaging
+# 一般的方法是编译，但比较麻烦，以上命令搞定
+```
+
 ## 使用global声明全局变量
 ```python
 global x, y, z
