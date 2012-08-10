@@ -1,3 +1,109 @@
+## 判断元素是否存在：
+```js
+if($(selector)[0]){…}  
+#或  
+if($(selector).length){…}  
+```
+
+## 使用 each 实现循环
+```js
+var myArr = ['apple','banana','orange'];  
+   
+$.each(myArr, function(index, item) {  
+    // Do something with 'item'  
+    // return false to BREAK  
+    // return true to CONTINUE  
+});  
+```
+
+## 使用变量来缓存元素
+```js
+var myInjectedDiv = $('<div/>').appendTo('body');  
+   
+// Use 'myInjectedDiv' to reference the element:  
+myInjectedDiv.bind('click', function(){  
+    // ...  
+});  
+```
+
+## 通过 map 由其中的函数返回值生成序列
+```js
+// Create an array containing all anchor HREF attributes:  
+var URLs = $.map($('a'), function(elem, index){  
+    return elem.href;  
+});  
+   
+// URLs = ['http://google.com', 'http://whatever.com', 'http://yahoo.com']  
+```
+
+## 向 firebug 注册返回信息
+```js
+console.time('My first method');  
+// Do something...  
+console.timeEnd('My first method');  
+   
+console.time('My second method');  
+// Do something else...  
+console.timeEnd('My second method');  
+   
+// Firebug will log the time (in milliseconds) taken  
+// to complete each chunk...  
+```
+
+## 在任意对象中绑定时间
+```js
+function Widget() {  
+    // Do something...  
+};  
+   
+var myPhotoWidget = new Widget('photos');  
+   
+jQuery(myPhotoWidget).bind('photoAdd', function() {  
+    // Custom event handling...  
+});  
+   
+// Trigger event:  
+jQuery(myPhotoWidget).trigger('photoAdd');  
+```
+
+## 通过数组形式访问对象集
+```js
+var HTMLCollection = $('div').get();  
+   
+// Alternatively, if you only want the first element:  
+$('div').get(0);  
+$('div').get()[0];  
+$('div')[0];  
+```
+
+## 一条语句即可生成Dom树
+```js
+// Create and inject in one chain:  
+jQuery('<div/>')  
+    .append('<p><a href="#">Foo</a></p>')  
+    .find('p a')  
+        .click(function(){  
+            // Do something...  
+            return false;  
+        })  
+        .end()  
+    .append('<p><a href="#">Bar</a></p>')  
+    .find('p:eq(1) a')  
+        .click(function(){  
+            // Do something else...  
+            return false;  
+        })  
+        .end()  
+    .appendTo('body');  
+```
+
+## 判断元素是否可见
+```js
+if ($('.warning').is(':visible')) {  
+    $('.warning').hide();  
+}  
+```
+
 ## 提前缓存需要的文件
 ```js
 (function($) {  
