@@ -4,6 +4,12 @@
 一旦你完成了这个程序，你就可以说是一个Python程序员了。
 ```
 
+## 设置缺省的python版本
+```sh
+$ sudo rm /usr/bin/python
+$ sudo ln -s /usr/bin/python2.7 /usr/bin/python
+```
+
 ## 安装PIL
 ```sh
 sudo apt-get install python-imaging
